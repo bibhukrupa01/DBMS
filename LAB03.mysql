@@ -1,0 +1,92 @@
+
+CREATE TABLE EMPLOYEE (
+    EMPNO INT PRIMARY KEY,
+    ENAME VARCHAR(20),
+    JOB VARCHAR(20),
+    MGR INT,
+    HIREDATE DATE,
+    SAL INT,
+    COMM INT,
+    DEPTNO INT
+);
+
+INSERT INTO EMPLOYEE VALUES
+(7369, 'SMITH',  'CLERK',    7902, '1980-12-17',  800, NULL, 20),
+(7499, 'ALLEN',  'SALESMAN', 7698, '1981-02-20', 1600, 300, 30),
+(7521, 'WARD',   'SALESMAN', 7698, '1981-02-22', 1250, 500, 30),
+(7566, 'JONES',  'MANAGER',  7839, '1981-04-02', 2975, NULL, 20),
+(7654, 'MARTIN', 'SALESMAN', 7698, '1981-09-28', 1250, 1400, 30),
+(7698, 'BLAKE',  'MANAGER',  7839, '1981-05-01', 2850, NULL, 30),
+(7782, 'CLARK',  'MANAGER',  7839, '1981-06-09', 2450, NULL, 10),
+(7788, 'SCOTT',  'ANALYST',  7566, '1987-04-19', 3000, NULL, 20),
+(7839, 'KING',   'PRESIDENT',NULL, '1981-11-17', 5000, NULL, 10),
+(7844, 'TURNER', 'SALESMAN', 7698, '1981-09-08', 1500, 0,    30),
+(7876, 'ADAMS',  'CLERK',    7788, '1987-05-23', 1100, NULL, 20),
+(7900, 'JAMES',  'CLERK',    7698, '1981-12-03',  950, NULL, 30),
+(7902, 'FORD',   'ANALYST',  7566, '1981-12-03', 3000, NULL, 20),
+(7934, 'MILLER', 'CLERK',    7782, '1982-01-23', 1300, NULL, 10);
+
+
+SELECT * FROM EMPLOYEE;
+
+
+/*
+List all employees and jobs in Department 30 in descending order by salary
+*/
+SELECT ENAME,JOB FROM EMPLOYEE  WHERE DEPTNO=30 ORDER BY SAL desc;
+
+/*
+List job and Department Number of employees whose name are five letters long begin with “A” and end with “N”.
+*/
+SELECT JOB,DEPTNO FROM EMPLOYEE WHERE ENAME LIKE "A___N";
+
+/*
+Display the name of employees whose name start with alphabet S.
+*/
+SELECT ENAME FROM EMPLOYEE WHERE ENAME LIKE 'S%';
+
+/*
+Display the names of employees whose name ends with alphabet S.
+*/
+SELECT ENAME FROM EMPLOYEE WHERE ENAME LIKE '%S';
+
+/*
+Display the names of employees working in department number 10 or 20 or 40 or employees working as clerks, salesman or analyst
+*/
+SELECT ENAME FROM EMPLOYEE WHERE DEPTNO IN (10,20,40) OR JOB IN ('CLERK','ANALYST','SALESMAN');
+
+/*
+Display employee number and names for employees who earn commission
+*/
+SELECT EMPNO,ENAME FROM EMPLOYEE WHERE COMM IS NOT NULL AND COMM>0;
+
+/*
+Display employee number and total salary for each employee
+*/
+SELECT EMPNO, SAL+ ifnull(COMM,0) AS TOTAL_SALARY FROM EMPLOYEE;
+
+/*
+Display employee number and annual salary for each employee
+*/
+SELECT EMPNO,SAL*12 AS ANNUAL_SALARY FROM EMPLOYEE;
+
+/*
+Display the names of all employees working as clerks and drawing a salary more than 3,000
+*/
+SELECT ENAME FROM EMPLOYEE WHERE JOB='CLERK' AND SAL>3000;
+
+/*
+Display the names of employees who are working as clerk, salesman or analyst and drawing a salary more than 3,000
+*/
+SELECT ENAME FROM EMPLOYEE WHERE JOB IN ('CLERK','SALESMAN','ANALYST') AND SAL>3000;
+
+
+
+
+
+
+
+
+
+
+
